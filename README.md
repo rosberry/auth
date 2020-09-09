@@ -1,6 +1,6 @@
 # Auth
 
-Authorization through social networks, information about the user
+Authentication with social networks, information about the user
 
 ## Supported:
 - Apple
