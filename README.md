@@ -12,6 +12,8 @@ Authentication with social networks, information about the user
 ## Usage
 ### Input: token and auth type
 ```golang
+import "github.com/rosberry/auth"
+
 ud, err := auth.Auth(googleToken, auth.AuthTypeGoogle)
 ```
 Apple, Google: ```JWT token (id_token)```
