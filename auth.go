@@ -21,7 +21,7 @@ type (
 
 const (
 	//AuthTypeGoogle - auth with Google
-	AuthTypeGoogle AuthType = iota + 1
+	AuthTypeGoogle Type = iota + 1
 	//AuthTypeApple - auth with Apple
 	AuthTypeApple
 	//AuthTypeFacebook - auth with Facebook
