@@ -32,6 +32,14 @@ const (
 
 //Auth returning user details by token and auth type
 func Auth(token string, authType Type) (userDetails *UserDetails, err error) {
+	return auth(token, "", authType)
+}
+
+func AuthWithCheckAUD(token string, aud string, authType Type) (userDetails *UserDetails, err error) {
+	return auth(token, aud, authType)
+}
+
+func auth(token string, aud string, authType Type) (userDetails *UserDetails, err error) {
 	var authService AuthService
 	switch authType {
 	case AuthTypeGoogle:
@@ -50,9 +58,16 @@ func Auth(token string, authType Type) (userDetails *UserDetails, err error) {
 		return nil, errors.New("Auth service is nil")
 	}
 
-	ud, err := authService.auth(token)
+	switch aud {
+	case "": 
+		userDetails, err = authService.auth(token)
+	default:
+		userDetails, err = authService.authWithCheckAUD(token, aud)
+	}
+	
 	if err != nil {
 		return nil, err
 	}
-	return ud, nil
+
+	return userDetails, nil
 }

@@ -12,6 +12,10 @@ type (
 const googleKeysEndpoint = "https://www.googleapis.com/oauth2/v2/certs"
 
 func (s *Google) auth(token string) (ud *UserDetails, err error) {
+	return s.authWithCheckAUD(token, "")
+}
+
+func (s *Google) authWithCheckAUD(token, aud string) (ud *UserDetails, err error) {
 	type TokenInfo struct {
 		Sub       string `json:"sub"`
 		Name      string `json:"name"`
@@ -27,6 +31,12 @@ func (s *Google) auth(token string) (ud *UserDetails, err error) {
 		return nil, err
 	}
 	info, _ := t.Claims.(*TokenInfo)
+
+	if aud != "" {
+		if ok := info.VerifyAudience(aud, true); !ok {
+			return nil, ErrNotValidAudience
+		}
+	}
 
 	if info != nil {
 		ud = &UserDetails{

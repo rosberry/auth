@@ -74,3 +74,7 @@ func (s *Facebook) auth(token string) (ud *UserDetails, err error) {
 
 	return
 }
+
+func (s *Facebook) authWithCheckAUD(token, aud string) (ud *UserDetails, err error) {
+	return s.auth(token)
+}
