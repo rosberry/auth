@@ -30,6 +30,9 @@ const (
 	AuthTypeVK
 )
 
+// Leeway in seconds (for issuedAt and ExpiresAt)
+var Leeway int64 = 10
+
 //Auth returning user details by token and auth type
 func Auth(token string, authType Type) (userDetails *UserDetails, err error) {
 	var authService AuthService
