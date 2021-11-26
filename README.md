@@ -16,6 +16,14 @@ import "github.com/rosberry/auth"
 
 ud, err := auth.Auth(googleToken, auth.AuthTypeGoogle)
 ```
+
+OR if you want check token audience:
+```golang
+import "github.com/rosberry/auth"
+
+ud, err := auth.AuthWithCheckAUD(googleToken, audience, auth.AuthTypeGoogle)
+```
+
 Apple, Google: ```JWT token (id_token)```
 Facebook, VK: ```access_token```
 
@@ -34,6 +42,7 @@ UserDetails struct {
 ### Important
 - VK don't sent email in user information
 - Apple don't include username (firstname and lastname) in JWT token
+
 
 ## About
 
