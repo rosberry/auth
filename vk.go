@@ -66,3 +66,7 @@ func (s *VK) auth(token string) (ud *UserDetails, err error) {
 
 	return
 }
+
+func (s *VK) authWithCheckAUD(token, aud string) (ud *UserDetails, err error) {
+	return s.auth(token)
+}

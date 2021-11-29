@@ -2,6 +2,7 @@ package auth
 
 import (
 	"crypto/rsa"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -16,8 +17,11 @@ type (
 
 	AuthService interface {
 		auth(token string) (ud *UserDetails, err error)
+		authWithCheckAUD(token, aud string) (ud *UserDetails, err error)
 	}
 )
+
+var ErrNotValidAudience = errors.New("not valid audience")
 
 func getTokenValidateFunc(endpoint string) func(t *jwt.Token) (interface{}, error) {
 	return func(t *jwt.Token) (interface{}, error) {
